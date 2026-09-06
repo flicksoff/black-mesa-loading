@@ -24,6 +24,7 @@ html, body {
 .background {
     position: fixed;
     inset: -2%;
+    background-image: url("assets/images/facility-background.jpg");
     background-position: center;
     background-size: cover;
     filter: saturate(.78) contrast(1.08);

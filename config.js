@@ -8,7 +8,7 @@ window.BM_LOADING_CONFIG = {
 
     // Tu peux ajouter plusieurs images : une sera choisie au hasard à chaque connexion.
     backgrounds: [
-        "assets/images/facility-background.png"
+        "assets/images/facility-background.jpg"
     ],
     randomBackground: true,
 

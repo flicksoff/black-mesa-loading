@@ -23,7 +23,10 @@ html, body {
 
 .background {
     position: fixed;
-    inset: -2%;
+    top: -2%;
+    right: -2%;
+    bottom: -2%;
+    left: -2%;
     background-image: url("assets/images/facility-background.jpg");
     background-position: center;
     background-size: cover;
@@ -34,7 +37,10 @@ html, body {
 
 .vignette {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background:
         linear-gradient(90deg, rgba(2, 4, 3, .92) 0%, rgba(3, 5, 4, .66) 30%, rgba(3, 5, 4, .16) 65%, rgba(3, 4, 3, .48) 100%),
         linear-gradient(180deg, rgba(0, 0, 0, .72) 0%, transparent 34%, transparent 66%, rgba(0, 0, 0, .92) 100%);
@@ -42,7 +48,10 @@ html, body {
 
 .scanlines {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: none;
     opacity: .13;
     background: repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(255,255,255,.035) 4px);
@@ -84,7 +93,7 @@ html, body {
 
 .brand-mark::before { width: 4px; height: 22px; left: 18px; top: 9px; }
 .brand-mark::after { width: 22px; height: 4px; left: 9px; top: 18px; }
-.brand-core { position: absolute; inset: 15px; background: var(--black); }
+.brand-core { position: absolute; top: 15px; right: 15px; bottom: 15px; left: 15px; background: var(--black); }
 
 .brand-copy { line-height: 1; }
 .eyebrow { margin: 0 0 7px; color: var(--orange); font-size: 11px; font-weight: 800; letter-spacing: .22em; }

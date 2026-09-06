@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Black Mesa RP France — Chargement</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="background" class="background" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <main class="layout">
+        <header class="topbar">
+            <div class="brand-mark" aria-hidden="true">
+                <span class="brand-core"></span>
+            </div>
+            <div class="brand-copy">
+                <p id="facility" class="eyebrow">BLACK MESA RESEARCH FACILITY</p>
+                <h1 id="server-name">BLACK MESA RP FRANCE</h1>
+            </div>
+            <div class="clearance">
+                <span class="clearance-dot"></span>
+                <div>
+                    <small>ACCÈS RÉSEAU</small>
+                    <strong>CONNEXION AUTORISÉE</strong>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="sector-label"><span>SECTEUR</span><strong id="sector">ANOMALOUS MATERIALS</strong></p>
+                <h2 id="headline">Bienvenue au complexe</h2>
+                <p id="tagline" class="tagline">La science exige de la précision. Votre coopération est obligatoire.</p>
+
+                <div class="identity-grid">
+                    <div>
+                        <small>PERSONNEL</small>
+                        <strong id="player-name">VISITEUR EN COURS D’IDENTIFICATION</strong>
+                    </div>
+                    <div>
+                        <small>CARTE</small>
+                        <strong id="map-name">INITIALISATION...</strong>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="protocol-card">
+                <div class="protocol-head">
+                    <span>PROTOCOLE D’ARRIVÉE</span>
+                    <b id="protocol-number">01</b>
+                </div>
+                <p id="tip">Respectez les consignes du personnel de sécurité.</p>
+                <div class="protocol-rule"></div>
+                <small>MESSAGE AUTOMATIQUE DU COMPLEXE</small>
+            </aside>
+        </section>
+
+        <footer class="loading-panel">
+            <div class="status-row">
+                <div>
+                    <span class="pulse-dot"></span>
+                    <span id="status">ÉTABLISSEMENT DE LA LIAISON...</span>
+                </div>
+                <strong id="percent">0%</strong>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div id="progress" class="progress-fill"></div>
+                <div id="progress-glow" class="progress-glow"></div>
+            </div>
+            <div class="download-row">
+                <span id="download-file">Synchronisation des ressources du serveur</span>
+                <button id="audio-toggle" type="button" aria-label="Couper ou réactiver la musique">
+                    <span id="audio-icon">◖))</span>
+                    <span id="track-name">AMBIANCE DU COMPLEXE</span>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <audio id="music-player" preload="auto"></audio>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

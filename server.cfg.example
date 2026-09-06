@@ -1,0 +1,2 @@
+// À utiliser seulement après avoir hébergé le dossier sur une URL HTTPS publique.
+sv_loadingurl "https://ton-domaine.fr/loading/index.html?steamid=%s&mapname=%m"

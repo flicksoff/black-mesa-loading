@@ -143,19 +143,37 @@
 
         player.src = track.file;
         player.volume = Math.max(0, Math.min(1, Number(cfg.musicVolume) || 0.28));
+        player.autoplay = true;
+        player.loop = track.loop !== false;
+        player.setAttribute("playsinline", "");
         setAudioButton("◖))", safeText(track.title, "AMBIANCE DU COMPLEXE"), false);
 
         function tryPlay() {
             var result = player.play();
-            if (result && result.catch) result.catch(function () {});
+            if (result && result.then) {
+                result.then(function () {
+                    state.musicStarted = true;
+                }).catch(function () {
+                    setAudioButton("▶", "CLIQUER — " + safeText(track.title, "MUSIQUE"), false);
+                });
+            } else {
+                state.musicStarted = true;
+            }
         }
 
-        player.addEventListener("ended", function () {
-            setupMusic();
-            tryPlay();
-        }, {once: true});
+        player.addEventListener("playing", function () {
+            state.musicStarted = true;
+            setAudioButton("◖))", safeText(track.title, "AMBIANCE DU COMPLEXE"), false);
+        });
 
         byId("audio-toggle").addEventListener("click", function () {
+            if (!state.musicStarted || player.paused) {
+                state.muted = false;
+                player.muted = false;
+                tryPlay();
+                return;
+            }
+
             state.muted = !state.muted;
             player.muted = state.muted;
             setAudioButton(

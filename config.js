@@ -12,12 +12,12 @@ window.BM_LOADING_CONFIG = {
     ],
     randomBackground: true,
 
-    // "youtubeId" utilise le lecteur officiel YouTube intégré.
-    // Pour un fichier local, remplace youtubeId par file: "assets/music/titre.mp3".
+    // Fichier audio direct : pas de publicité et tentative de lecture automatique.
     music: [
         {
             title: "SILO THEME — ATLI ÖRVARSSON",
-            youtubeId: "Dwtkp1udc5U"
+            file: "assets/music/silo-theme.mp3",
+            loop: true
         }
     ],
     randomMusic: false,

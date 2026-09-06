@@ -12,15 +12,15 @@ window.BM_LOADING_CONFIG = {
     ],
     randomBackground: true,
 
-    // Place tes fichiers .mp3 ou .ogg dans assets/music puis ajoute-les ici.
-    // Une URL HTTPS directe vers un fichier audio fonctionne également.
+    // "youtubeId" utilise le lecteur officiel YouTube intégré.
+    // Pour un fichier local, remplace youtubeId par file: "assets/music/titre.mp3".
     music: [
         {
-            title: "AMBIANCE DU COMPLEXE",
-            file: "assets/music/black-mesa-ambient.wav"
+            title: "SILO THEME — ATLI ÖRVARSSON",
+            youtubeId: "Dwtkp1udc5U"
         }
     ],
-    randomMusic: true,
+    randomMusic: false,
     musicVolume: 0.28,
 
     tipsInterval: 6500,

@@ -189,6 +189,17 @@ h2 { max-width: 680px; margin: 0; font-size: clamp(46px, 6.2vw, 100px); line-hei
 #audio-toggle.muted { color: #7d817e; }
 #audio-icon { width: 24px; color: var(--orange); font-size: 13px; font-weight: 900; }
 
+#youtube-player {
+    position: fixed;
+    left: -10px;
+    bottom: -10px;
+    width: 2px;
+    height: 2px;
+    border: 0;
+    opacity: .001;
+    pointer-events: none;
+}
+
 @keyframes pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
 @keyframes camera-drift { from { transform: scale(1.035) translate3d(-.25%, 0, 0); } to { transform: scale(1.065) translate3d(.35%, -.2%, 0); } }
 

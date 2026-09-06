@@ -8,7 +8,8 @@
         downloaded: 0,
         progress: 0,
         tipIndex: 0,
-        muted: false
+        muted: false,
+        musicStarted: false
     };
 
     function byId(id) {
@@ -66,17 +67,83 @@
         }, 220);
     }
 
+    function setAudioButton(icon, title, muted) {
+        byId("audio-icon").textContent = icon;
+        byId("track-name").textContent = title;
+        byId("audio-toggle").classList.toggle("muted", muted === true);
+    }
+
+    function setupYouTubeMusic(track) {
+        var videoId = String(track.youtubeId || "").replace(/[^a-zA-Z0-9_-]/g, "");
+        if (!videoId) return false;
+
+        var iframe = document.createElement("iframe");
+        var volume = Math.round(Math.max(0, Math.min(1, Number(cfg.musicVolume) || 0.28)) * 100);
+        var title = safeText(track.title, "MUSIQUE YOUTUBE");
+        iframe.id = "youtube-player";
+        iframe.title = title;
+        iframe.allow = "autoplay; encrypted-media";
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId
+            + "?autoplay=1&loop=1&playlist=" + videoId
+            + "&controls=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1";
+        document.body.appendChild(iframe);
+
+        function command(name, args) {
+            if (!iframe.contentWindow) return;
+            iframe.contentWindow.postMessage(JSON.stringify({
+                event: "command",
+                func: name,
+                args: args || []
+            }), "https://www.youtube-nocookie.com");
+        }
+
+        function startWithSound() {
+            command("setVolume", [volume]);
+            command("unMute");
+            command("playVideo");
+            state.musicStarted = true;
+            state.muted = false;
+            setAudioButton("◖))", title, false);
+        }
+
+        iframe.addEventListener("load", function () {
+            command("setVolume", [volume]);
+            command("playVideo");
+        });
+
+        setAudioButton("▶", "CLIQUER — " + title, false);
+        byId("audio-toggle").addEventListener("click", function () {
+            if (!state.musicStarted) {
+                startWithSound();
+                return;
+            }
+
+            state.muted = !state.muted;
+            command(state.muted ? "mute" : "unMute");
+            if (!state.muted) command("playVideo");
+            setAudioButton(state.muted ? "×" : "◖))", title, state.muted);
+        });
+
+        return true;
+    }
+
     function setupMusic() {
         var track = choose(cfg.music, cfg.randomMusic);
         var player = byId("music-player");
-        if (!track || !track.file) {
+        if (!track) {
+            byId("audio-toggle").hidden = true;
+            return;
+        }
+
+        if (track.youtubeId && setupYouTubeMusic(track)) return;
+        if (!track.file) {
             byId("audio-toggle").hidden = true;
             return;
         }
 
         player.src = track.file;
         player.volume = Math.max(0, Math.min(1, Number(cfg.musicVolume) || 0.28));
-        byId("track-name").textContent = safeText(track.title, "AMBIANCE DU COMPLEXE");
+        setAudioButton("◖))", safeText(track.title, "AMBIANCE DU COMPLEXE"), false);
 
         function tryPlay() {
             var result = player.play();
@@ -91,8 +158,11 @@
         byId("audio-toggle").addEventListener("click", function () {
             state.muted = !state.muted;
             player.muted = state.muted;
-            byId("audio-icon").textContent = state.muted ? "×" : "◖))";
-            byId("audio-toggle").classList.toggle("muted", state.muted);
+            setAudioButton(
+                state.muted ? "×" : "◖))",
+                safeText(track.title, "AMBIANCE DU COMPLEXE"),
+                state.muted
+            );
             if (!state.muted) tryPlay();
         });
 
